@@ -1,0 +1,142 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Flirty Comments</title>
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            background: #ffebf0;
+            color: #333;
+            padding: 20px;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .background-text {
+            position: absolute;
+            width: 100%;
+            height: 160%;
+            top: 0;
+            left: 0;
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: center;
+            font-size: 40px;
+            font-weight: bold;
+            color: rgba(255, 192, 203, 0.5);
+            text-transform: uppercase;
+            z-index: 0;
+            pointer-events: none;
+            user-select: none;
+        }
+        .container {
+            width: 40%;
+            padding: 20px;
+            height: 60vh;
+            border-radius: 10px;
+            background: rgba(255, 255, 255, 0.8);
+            box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            position: relative;
+            z-index: 2;
+            border: 5px solid transparent;
+            transform: translateY(-100px);
+        }
+        .container::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: -5px;
+            right: -5px;
+            bottom: -5px;
+            border-radius: 10px;
+            border: 5px solid transparent;
+            background: linear-gradient(90deg, rgba(255, 20, 147, 1), rgba(255, 87, 87, 0.5), rgba(255, 20, 147, 1));
+            background-size: 300% 300%;
+            animation: borderAnimation 4s linear infinite;
+            z-index: -1;
+        }
+        @keyframes borderAnimation {
+            0% { background-position: 0% 50%; }
+            50% { background-position: 100% 50%; }
+            100% { background-position: 0% 50%; }
+        }
+        @keyframes riseHearts {
+            0% { transform: translateY(100vh) scale(0.5); opacity: 1; }
+            100% { transform: translateY(-10vh) scale(1.2); opacity: 0; }
+        }
+        .heart-float {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            font-size: 30px;
+            color: #ff5e6c;
+            animation: riseHearts 5s linear infinite;
+        }
+
+        /* Custom Styling for Buttons */
+        .custom-file-upload {
+            display: inline-block;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: #ff4081;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .custom-file-upload:hover {
+            background: #e91e63;
+        }
+        input[type="file"] {
+            display: none;
+        }
+        .upload-btn {
+            margin-top: 10px;
+            padding: 10px 20px;
+            font-size: 16px;
+            font-weight: bold;
+            color: white;
+            background: #ff4081;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        .upload-btn:hover {
+            background: #e91e63;
+        }
+    </style>
+</head>
+<body>
+    <div class="background-text">
+        Made with Love 💕 &nbsp; | &nbsp;________ 💖 &nbsp; | &nbsp; By _celestial_nomad_ 💞
+    </div>
+    <div class="container">
+        <h2>Wanna get some flirty comments? 💕</h2>
+        <form action="/" method="post" enctype="multipart/form-data">
+            <label for="file" class="custom-file-upload">📸 Choose an Image</label>
+            <input type="file" name="file" id="file" required>
+            <button type="submit" class="upload-btn">❤️ Upload ❤️</button>
+        </form>
+        {% if image_url %}
+            <img src="{{ image_url }}" alt="Uploaded Image">
+            <p class="comment"><span class="heart">❤️</span> {{ comment }} <span class="heart">❤️</span></p>
+        {% endif %}
+    </div>
+    <div class="heart-float">❤️</div>
+    <div class="heart-float" style="left: 30%; animation-delay: 1s;">💖</div>
+    <div class="heart-float" style="left: 70%; animation-delay: 2s;">💕</div>
+</body>
+</html>
